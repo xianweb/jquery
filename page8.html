@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>jquery基础 | AJAX</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/jquery/assets/css/9.styles.040b0ca1.css" as="style"><link rel="preload" href="/jquery/assets/js/app.97fd381c.js" as="script"><link rel="preload" href="/jquery/assets/js/1.1f556057.js" as="script"><link rel="prefetch" href="/jquery/assets/js/5.8da412a6.js"><link rel="prefetch" href="/jquery/assets/js/2.05f7b753.js"><link rel="prefetch" href="/jquery/assets/js/3.59752565.js"><link rel="prefetch" href="/jquery/assets/js/4.f214500c.js"><link rel="prefetch" href="/jquery/assets/js/0.f4615c86.js"><link rel="prefetch" href="/jquery/assets/js/6.8e2a35c1.js"><link rel="prefetch" href="/jquery/assets/js/7.daa9a5a9.js"><link rel="prefetch" href="/jquery/assets/js/8.566aac5e.js">
+    <link rel="stylesheet" href="/jquery/assets/css/9.styles.040b0ca1.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/jquery/" class="home-link router-link-active"><!----><span class="site-name">
+      jquery基础
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><ul class="sidebar-links"><li><a href="/jquery/page1.html" class="sidebar-link">安装</a></li><li><a href="/jquery/page2.html" class="sidebar-link">选择器</a></li><li><a href="/jquery/page3.html" class="sidebar-link">筛选</a></li><li><a href="/jquery/page4.html" class="sidebar-link">CSS</a></li><li><a href="/jquery/page5.html" class="sidebar-link">文档处理</a></li><li><a href="/jquery/page6.html" class="sidebar-link">事件</a></li><li><a href="/jquery/page7.html" class="sidebar-link">效果</a></li><li><a href="/jquery/page8.html" class="active sidebar-link">AJAX</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/jquery/page8.html#ajax-请求" class="sidebar-link">ajax 请求</a></li><li class="sidebar-sub-header"><a href="/jquery/page8.html#jsonp-请求" class="sidebar-link">JSONP 请求</a></li></ul></li></ul></div><div class="page"><div class="content"><h1 id="ajax"><a href="#ajax" aria-hidden="true" class="header-anchor">#</a> AJAX</h1><h2 id="ajax-请求"><a href="#ajax-请求" aria-hidden="true" class="header-anchor">#</a> ajax 请求</h2><ul><li><code>$.ajax(url,[settings])</code> 发送ajax</li><li><code>$.get(url,[data],[fn],[type])</code> 发送get</li><li><code>$.post(url,[data],[fn],[type])</code> 发送post</li></ul><h2 id="jsonp-请求"><a href="#jsonp-请求" aria-hidden="true" class="header-anchor">#</a> JSONP 请求</h2><p>客户端</p><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+<span class="token keyword">function</span> <span class="token function">callback</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>服务端地址?jsoncallback=callback<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p>服务器端</p><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token comment">//1. 输出JSON数据文件头</span>
+<span class="token function">header</span><span class="token punctuation">(</span><span class="token single-quoted-string string">'Content-type: application/json'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//2. 获取回调函数名</span>
+<span class="token variable">$jsoncallback</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token single-quoted-string string">'jsoncallback'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">//3. 设置json数据</span>
+<span class="token variable">$json_data</span> <span class="token operator">=</span> <span class="token single-quoted-string string">'来自后端的信息'</span><span class="token punctuation">;</span>
+
+<span class="token comment">//4. 输出jsonp格式的数据</span>
+<span class="token keyword">echo</span> <span class="token variable">$jsoncallback</span> <span class="token punctuation">.</span> <span class="token double-quoted-string string">&quot;(&quot;</span> <span class="token punctuation">.</span> <span class="token variable">$json_data</span> <span class="token punctuation">.</span> <span class="token double-quoted-string string">&quot;)&quot;</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?&gt;</span></span>
+</code></pre></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
+        ← <a href="/jquery/page7.html" class="prev">
+          效果
+        </a></span><!----></p></div></div></div></div>
+    <script src="/jquery/assets/js/1.1f556057.js" defer></script><script src="/jquery/assets/js/app.97fd381c.js" defer></script>
+  </body>
+</html>
